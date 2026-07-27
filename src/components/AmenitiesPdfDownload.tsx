@@ -115,7 +115,7 @@ export function AmenitiesPdfDownload() {
     <button
       type="button"
       onClick={handleDownload}
-      className="font-ui inline-flex items-center justify-center border border-[#2c3b32]/30 px-4 py-3 text-xs uppercase tracking-[0.16em] text-[#2c3b32] transition hover:border-[#2c3b32]/55 hover:bg-[#2c3b32]/5 md:px-5 md:py-3.5 md:text-sm"
+      className="font-ui inline-flex items-center justify-center border border-[#2c3b32]/30 px-3.5 py-2.5 text-[11px] uppercase tracking-[0.14em] text-[#2c3b32] transition hover:border-[#2c3b32]/55 hover:bg-[#2c3b32]/5 md:px-5 md:py-3.5 md:text-sm md:tracking-[0.16em]"
     >
       Download amenities PDF
     </button>

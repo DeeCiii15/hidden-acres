@@ -87,7 +87,7 @@ export function Header() {
               : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 overflow-visible px-4 pt-[env(safe-area-inset-top)] pr-[max(1rem,env(safe-area-inset-right))] sm:h-[4.5rem] sm:gap-3 sm:px-5 sm:pr-[max(1.25rem,env(safe-area-inset-right))] md:h-20 md:px-8 md:pr-8">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 overflow-visible px-4 pt-[max(0.5rem,env(safe-area-inset-top))] pr-[max(1.25rem,calc(env(safe-area-inset-right)+0.75rem))] sm:h-[4.5rem] sm:gap-3 sm:px-5 sm:pr-[max(1.5rem,calc(env(safe-area-inset-right)+0.75rem))] md:h-20 md:px-8 md:pr-8">
           <Link
             href="/"
             className="inline-flex min-w-0 shrink items-center gap-1 overflow-visible sm:gap-2.5 md:gap-3"
@@ -145,7 +145,7 @@ export function Header() {
 
           <button
             type="button"
-            className={`relative z-10 -mr-1 inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-visible lg:hidden ${
+            className={`relative z-10 inline-flex h-12 w-12 shrink-0 items-center justify-center overflow-visible lg:hidden ${
               onDarkHero ? "text-white" : "text-[#2c3b32]"
             }`}
             aria-label={open ? "Close menu" : "Open menu"}
@@ -153,23 +153,25 @@ export function Header() {
             onClick={() => setOpen((v) => !v)}
           >
             <span className="sr-only">Menu</span>
-            <span className="relative block h-3.5 w-5 overflow-visible" aria-hidden>
-              <span
-                className={`absolute left-0 top-0 block h-px w-5 origin-center bg-current transition duration-300 ${
-                  open ? "top-[6.5px] rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`absolute left-0 top-[6.5px] block h-px w-5 bg-current transition duration-300 ${
-                  open ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`absolute left-0 top-[13px] block h-px w-5 origin-center bg-current transition duration-300 ${
-                  open ? "top-[6.5px] -rotate-45" : ""
-                }`}
-              />
-            </span>
+            {open ? (
+              <svg
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                aria-hidden
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            ) : (
+              <span className="relative block h-3.5 w-5" aria-hidden>
+                <span className="absolute left-0 top-0 block h-px w-5 bg-current" />
+                <span className="absolute left-0 top-[6.5px] block h-px w-5 bg-current" />
+                <span className="absolute left-0 top-[13px] block h-px w-5 bg-current" />
+              </span>
+            )}
           </button>
         </div>
       </div>
@@ -179,12 +181,12 @@ export function Header() {
           open ? "block" : "hidden"
         }`}
       >
-        <div className="flex flex-col px-5 py-3">
+        <div className="flex flex-col px-5 py-2.5">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="font-ui border-b border-[#2c3b32]/10 py-3 text-xs uppercase tracking-[0.16em] text-[#2c3b32]"
+              className="font-ui border-b border-[#2c3b32]/10 py-2.5 text-[11px] uppercase tracking-[0.14em] text-[#2c3b32]"
               onClick={() => setOpen(false)}
             >
               {link.label}
@@ -192,7 +194,7 @@ export function Header() {
           ))}
           <Link
             href={CONTACT_PATH}
-            className="font-ui mt-3 inline-flex items-center justify-center bg-[#2c3b32] px-4 py-3 text-xs uppercase tracking-[0.16em] text-white"
+            className="font-ui mt-2.5 inline-flex items-center justify-center bg-[#2c3b32] px-3.5 py-2.5 text-[11px] uppercase tracking-[0.14em] text-white"
             onClick={() => setOpen(false)}
           >
             Contact
