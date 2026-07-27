@@ -140,7 +140,7 @@ export const weddingPage = {
         { label: "See The Rusted Silo", href: `${VENUE_PATH}#rusted-silo` },
       ],
     },
-  ] satisfies WeddingSection[],
+  ] satisfies WeddingSection[] as WeddingSection[],
   goodToKnow: [
     "Complete freedom to choose your own wedding vendors.",
     "Rental starts Thursday at 8:30 AM and ends Sunday after cleanup — no rush.",

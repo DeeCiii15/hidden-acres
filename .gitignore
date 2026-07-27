@@ -22,6 +22,8 @@
 
 # misc
 .DS_Store
+Thumbs.db
+Desktop.ini
 *.pem
 
 # debug
@@ -39,3 +41,28 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local temp / scratch working dirs
+.tmp/
+tmp/
+tmp-hero/
+tmp-imgs/
+
+# python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# map & asset scratch (underscore-prefixed work products)
+# Keep live map + intentional public brand/venue images trackable.
+public/maps/_*.png
+public/maps/_*.py
+public/maps/_qa-*/
+public/maps/_edit_*/
+public/maps/ref-*-v*.png
+assets/_*.png
+
+# one-off script scratch
+scripts/_b64.txt
+scripts/_*.py
+scripts/__pycache__/

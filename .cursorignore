@@ -1,0 +1,32 @@
+# Heavy / irrelevant for AI context. Source under src/ stays editable.
+
+# dependencies & build
+node_modules/
+.next/
+out/
+build/
+.vercel/
+coverage/
+
+# local temp / scratch
+.tmp/
+tmp/
+tmp-hero/
+tmp-imgs/
+
+# python cache
+__pycache__/
+*.py[cod]
+
+# large map / asset scratch (keep live map + public brand/images available)
+public/maps/_*.png
+public/maps/_*.py
+public/maps/_qa-*/
+public/maps/_edit_*/
+public/maps/ref-*-v*.png
+assets/_*.png
+
+# one-off script scratch
+scripts/_b64.txt
+scripts/_*.py
+scripts/__pycache__/
