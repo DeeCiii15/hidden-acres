@@ -112,7 +112,7 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="mt-0 text-left leading-none md:col-start-1 md:row-start-1 md:mt-4">
+        <div className="mt-0 hidden text-left leading-none md:col-start-1 md:row-start-1 md:mt-4 md:block">
           <p className="font-ui text-[9px] uppercase leading-none tracking-[0.2em] text-champagne-soft sm:text-[10px]">
             On the grounds
           </p>
@@ -130,11 +130,11 @@ export function Footer() {
           </ul>
         </div>
 
-        <div className="mt-0 text-right leading-none md:col-start-3 md:row-start-1 md:mt-4">
+        <div className="col-span-2 mt-0 text-center leading-none md:col-span-1 md:col-start-3 md:row-start-1 md:mt-4 md:text-right">
           <p className="font-ui text-[9px] uppercase leading-none tracking-[0.2em] text-champagne-soft sm:text-[10px]">
             Explore
           </p>
-          <ul className="mt-2 space-y-1.5 sm:mt-3 sm:space-y-2.5">
+          <ul className="mt-2 flex flex-row flex-wrap items-center justify-center gap-x-3 gap-y-1.5 sm:mt-3 md:flex-col md:items-end md:justify-start md:space-y-2.5 md:gap-0">
             {exploreLinks.map((link) => (
               <li key={link.href}>
                 <Link

@@ -2,8 +2,8 @@
 
 export type MapPinSlot = "top-left" | "bottom-left" | "mid-right";
 
-/** Mobile only uses two slots (bottom-left is desktop-only). */
-export type MapPinMobileSlot = "top-left" | "mid-right";
+/** Mobile uses the same three slots as desktop (bottom-left overlaps parking/forest). */
+export type MapPinMobileSlot = "top-left" | "mid-right" | "bottom-left";
 
 export type MapPin = {
   spaceSlug: string;
@@ -13,7 +13,7 @@ export type MapPin = {
   y: number;
   /** Which fixed popout slot this pin fills on desktop (md+) */
   slot: MapPinSlot;
-  /** Which of the two inset slots this pin fills on mobile */
+  /** Which of the three inset slots this pin fills on mobile */
   mobileSlot: MapPinMobileSlot;
 };
 
@@ -46,14 +46,16 @@ export const SLOT_LAYOUT: Record<MapPinSlot, SlotLayout> = {
 };
 
 /**
- * Two smaller inset slots for narrow viewports:
- * top-left overlaps into the map; mid-right sits in the empty field / little-venue area.
+ * Three smaller inset slots for narrow viewports:
+ * top-left / mid-right as before; bottom-left overlaps left of the parking lot.
  */
 export const MOBILE_SLOT_LAYOUT: Record<MapPinMobileSlot, SlotLayout> = {
   /** Further west (toward left edge) so Chapel card clears its pin */
   "top-left": { side: "left", topPct: 17, insetPct: 6, mouthLift: 4 },
   /** Higher / further east in the right field — clear of the courtyard cluster */
   "mid-right": { side: "right", topPct: 40, insetPct: 2, mouthLift: 4 },
+  /** Left of the parking lot / south forest — Ballroom & Groom’s default here */
+  "bottom-left": { side: "left", topPct: 82, insetPct: 5, mouthLift: 4 },
 };
 
 export const SLOT_DEFAULTS: Record<MapPinSlot, string> = {
@@ -65,6 +67,7 @@ export const SLOT_DEFAULTS: Record<MapPinSlot, string> = {
 export const MOBILE_SLOT_DEFAULTS: Record<MapPinMobileSlot, string> = {
   "top-left": "the-chapel",
   "mid-right": "rusted-silo",
+  "bottom-left": "the-ballroom",
 };
 
 export const DESKTOP_SLOT_ORDER: MapPinSlot[] = [
@@ -73,14 +76,19 @@ export const DESKTOP_SLOT_ORDER: MapPinSlot[] = [
   "bottom-left",
 ];
 
-export const MOBILE_SLOT_ORDER: MapPinMobileSlot[] = ["top-left", "mid-right"];
+export const MOBILE_SLOT_ORDER: MapPinMobileSlot[] = [
+  "top-left",
+  "mid-right",
+  "bottom-left",
+];
 
 /**
  * Hotspot tip centers on the painted green pin markers
  * on `hidden-acres-grounds-illustrated.png` (1024×1536, user-v12 regen).
  * Hit targets in VenueMapExplorer extend upward from these tips over the pin body.
  *
- * Mobile grouping: left/grounds cluster → top-left; right cluster → mid-right.
+ * Mobile grouping: north/grounds → top-left; right cluster → mid-right;
+ * Ballroom & Groom’s → bottom-left (parking-lot side).
  */
 export const mapPins: MapPin[] = [
   {
@@ -116,7 +124,7 @@ export const mapPins: MapPin[] = [
     x: 49.1,
     y: 59.4,
     slot: "bottom-left",
-    mobileSlot: "top-left",
+    mobileSlot: "bottom-left",
   },
   {
     spaceSlug: "courtyard-pavilion",
@@ -137,6 +145,6 @@ export const mapPins: MapPin[] = [
     x: 54.3,
     y: 77.9,
     slot: "bottom-left",
-    mobileSlot: "top-left",
+    mobileSlot: "bottom-left",
   },
 ];

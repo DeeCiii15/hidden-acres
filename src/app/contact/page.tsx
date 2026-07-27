@@ -13,7 +13,6 @@ import {
   PORTFOLIO_PATH,
   SITE_NAME,
   SOCIAL,
-  VENUE_PATH,
 } from "@/lib/siteConfig";
 
 const title = "Contact & Tour Scheduling | Hidden Acres";
@@ -153,9 +152,6 @@ export default function ContactPage() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href={VENUE_PATH} variant="secondary">
-                Preview the venue tour
-              </Button>
               <Button href={`${ABOUT_PATH}#directions`} variant="secondary">
                 Get directions
               </Button>

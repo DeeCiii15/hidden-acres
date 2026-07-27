@@ -65,7 +65,7 @@ function ExpandedCard({
       className={`group relative z-30 block ${
         isMobile
           ? "w-[5.75rem]"
-          : "w-[10.75rem] sm:w-[12rem] lg:w-[13.25rem]"
+          : "w-[12.25rem] sm:w-[13.75rem] lg:w-[15rem]"
       } ${
         side === "left"
           ? "animate-venue-expand-left"

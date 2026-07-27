@@ -72,8 +72,9 @@ export function Header() {
 
   // Stay transparent over the hero for the full hero height — only solidify
   // once the dark surface has scrolled away (avoids a cream strip + hard line).
+  // Opening the mobile menu always uses the cream scrolled chrome (bar + panel).
   const onDarkHero = overHero && !open;
-  const solidBar = (scrolled || !overHero) && !onDarkHero;
+  const solidBar = open || ((scrolled || !overHero) && !onDarkHero);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 overflow-visible">
