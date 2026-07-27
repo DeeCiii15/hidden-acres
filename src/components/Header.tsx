@@ -86,19 +86,19 @@ export function Header() {
               : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-3 overflow-visible px-5 md:h-20 md:px-8">
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-2 overflow-visible px-4 sm:h-[4.5rem] sm:gap-3 sm:px-5 md:h-20 md:px-8">
           <Link
             href="/"
-            className="inline-flex shrink-0 items-center gap-2.5 overflow-visible md:gap-3"
+            className="inline-flex min-w-0 shrink items-center gap-1.5 overflow-visible sm:gap-2.5 md:gap-3"
             onClick={() => setOpen(false)}
           >
             <SiteLogo
               tone={onDarkHero ? "light" : "dark"}
               priority
-              className="h-[4.25rem] w-auto scale-[1.38] contrast-150 drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)] md:h-[4.75rem] md:scale-[1.45]"
+              className="h-8 w-auto shrink-0 scale-100 contrast-150 drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)] sm:h-[4.25rem] sm:scale-[1.38] md:h-[4.75rem] md:scale-[1.45]"
             />
             <span
-              className={`font-script text-[2.15rem] leading-none transition-colors duration-300 md:text-[2.55rem] ${
+              className={`font-script truncate text-[1.25rem] leading-none transition-colors duration-300 sm:text-[2.15rem] md:text-[2.55rem] ${
                 onDarkHero
                   ? "text-white [text-shadow:0_1px_18px_rgba(0,0,0,0.35)]"
                   : "text-[#2c3b32]"
@@ -144,7 +144,7 @@ export function Header() {
 
           <button
             type="button"
-            className={`inline-flex h-10 w-10 items-center justify-center lg:hidden ${
+            className={`inline-flex h-10 w-10 shrink-0 items-center justify-center lg:hidden ${
               onDarkHero ? "text-white" : "text-[#2c3b32]"
             }`}
             aria-label={open ? "Close menu" : "Open menu"}

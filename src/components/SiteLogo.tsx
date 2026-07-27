@@ -28,7 +28,7 @@ export function SiteLogo({
       width={280}
       height={200}
       priority={priority}
-      className={`h-auto w-auto object-contain transition-[filter] duration-300 ${toneClass} ${className}`}
+      className={`w-auto object-contain transition-[filter] duration-300 ${toneClass} ${className}`}
       aria-hidden
     />
   );

@@ -73,18 +73,55 @@ function PinterestIcon({ className }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="overflow-hidden border-t border-stroke bg-forest-deep text-cream pb-16 md:pb-[4.25rem]">
-      <div className="mx-auto grid max-w-5xl items-start gap-10 px-8 pt-4 pb-6 md:grid-cols-3 md:gap-12 md:px-10 md:pb-7">
-        <div className="mt-3 text-left leading-none md:mt-4">
-          <p className="font-ui text-[10px] uppercase leading-none tracking-[0.2em] text-champagne-soft">
+    <footer className="overflow-hidden border-t border-stroke bg-forest-deep text-cream pb-24 md:pb-[4.25rem]">
+      <div className="mx-auto grid max-w-5xl grid-cols-2 items-start gap-x-4 gap-y-5 px-5 pt-4 pb-3 sm:gap-x-8 sm:gap-y-8 sm:px-8 sm:pt-4 sm:pb-6 md:grid-cols-3 md:gap-12 md:px-10 md:pb-7">
+        {/* Brand: full-width on mobile (first), center column on desktop */}
+        <div className="col-span-2 flex flex-col items-center gap-0 text-center leading-none md:col-span-1 md:col-start-2 md:row-start-1 md:mt-4">
+          <Link
+            href="/"
+            aria-label={SITE_NAME}
+            className="block leading-none"
+          >
+            {/* Crop ~28.9% transparent PNG padding so the mark shares a top edge with nav headings */}
+            <span className="relative mx-auto block h-[2.5rem] w-[7.4rem] overflow-hidden leading-none sm:h-[4.225rem] sm:w-[12.5rem] md:h-[5.514rem] md:w-[16.3125rem]">
+              <SiteLogo
+                tone="light"
+                className="absolute left-1/2 top-0 h-[6rem] w-auto max-w-none -translate-x-1/2 -translate-y-[28.9%] contrast-150 drop-shadow-md sm:h-40 md:h-[13.05rem]"
+              />
+            </span>
+          </Link>
+          <p className="mt-1.5 max-w-[15rem] text-[11px] leading-snug text-cream/65 sm:mt-3 sm:max-w-none sm:text-sm">
+            {ADDRESS.full}
+          </p>
+          <div className="mt-1 flex items-center justify-center gap-0.5 sm:mt-2 sm:gap-1">
+            {socialLinks.map(({ href, label, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="inline-flex h-7 w-7 items-center justify-center rounded-full text-cream/70 transition hover:bg-cream/10 hover:text-cream sm:h-8 sm:w-8"
+              >
+                <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              </a>
+            ))}
+          </div>
+          <p className="mt-1.5 text-[10px] leading-none text-cream/45 sm:mt-2.5 sm:text-xs">
+            © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
+          </p>
+        </div>
+
+        <div className="mt-0 text-left leading-none md:col-start-1 md:row-start-1 md:mt-4">
+          <p className="font-ui text-[9px] uppercase leading-none tracking-[0.2em] text-champagne-soft sm:text-[10px]">
             On the grounds
           </p>
-          <ul className="mt-3 space-y-2.5">
+          <ul className="mt-2 space-y-1.5 sm:mt-3 sm:space-y-2.5">
             {groundsLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm leading-snug text-cream/75 transition hover:text-cream"
+                  className="text-xs leading-snug text-cream/75 transition hover:text-cream sm:text-sm"
                 >
                   {link.label}
                 </Link>
@@ -93,52 +130,16 @@ export function Footer() {
           </ul>
         </div>
 
-        <div className="flex flex-col items-center gap-0 text-center leading-none">
-          <Link
-            href="/"
-            aria-label={SITE_NAME}
-            className="block leading-none"
-          >
-            {/* Crop ~28.9% transparent PNG padding so the mark shares a top edge with nav headings */}
-            <span className="relative mx-auto block h-[4.225rem] w-[12.5rem] overflow-hidden leading-none md:h-[5.514rem] md:w-[16.3125rem]">
-              <SiteLogo
-                tone="light"
-                className="absolute left-1/2 top-0 h-40 w-auto max-w-none -translate-x-1/2 -translate-y-[28.9%] contrast-150 drop-shadow-md md:h-[13.05rem]"
-              />
-            </span>
-          </Link>
-          <p className="mt-3 text-sm leading-snug text-cream/65">
-            {ADDRESS.full}
-          </p>
-          <div className="mt-2 flex items-center justify-center gap-1">
-            {socialLinks.map(({ href, label, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                className="inline-flex h-8 w-8 items-center justify-center rounded-full text-cream/70 transition hover:bg-cream/10 hover:text-cream"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
-          </div>
-          <p className="mt-2.5 text-xs leading-none text-cream/45">
-            © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
-          </p>
-        </div>
-
-        <div className="mt-3 text-left leading-none md:mt-4 md:text-right">
-          <p className="font-ui text-[10px] uppercase leading-none tracking-[0.2em] text-champagne-soft">
+        <div className="mt-0 text-left leading-none md:col-start-3 md:row-start-1 md:mt-4 md:text-right">
+          <p className="font-ui text-[9px] uppercase leading-none tracking-[0.2em] text-champagne-soft sm:text-[10px]">
             Explore
           </p>
-          <ul className="mt-3 space-y-2.5">
+          <ul className="mt-2 space-y-1.5 sm:mt-3 sm:space-y-2.5">
             {exploreLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm leading-snug text-cream/75 transition hover:text-cream"
+                  className="text-xs leading-snug text-cream/75 transition hover:text-cream sm:text-sm"
                 >
                   {link.label}
                 </Link>

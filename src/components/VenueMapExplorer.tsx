@@ -2,16 +2,22 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
+  DESKTOP_SLOT_ORDER,
   MAP_IMAGE,
   MAP_IMAGE_HEIGHT,
   MAP_IMAGE_WIDTH,
+  MOBILE_SLOT_DEFAULTS,
+  MOBILE_SLOT_LAYOUT,
+  MOBILE_SLOT_ORDER,
   mapPins,
   SLOT_DEFAULTS,
   SLOT_LAYOUT,
   type MapPin,
+  type MapPinMobileSlot,
   type MapPinSlot,
+  type SlotLayout,
 } from "@/lib/mapPins";
 import { VENUE_PATH } from "@/lib/siteConfig";
 import { type VenueSpace } from "@/lib/venueData";
@@ -22,28 +28,44 @@ const objectPositionBySlug: Record<string, string> = {
   "ceremony-pond": "center 48%",
 };
 
-const SLOT_ORDER: MapPinSlot[] = ["top-left", "mid-right", "bottom-left"];
-
 /** Arch silhouette: semicircle top, soft square bottom (matches estate popout ref) */
 const ARCH_CARD_RADIUS = "9999px 9999px 0.65rem 0.65rem";
 const ARCH_PHOTO_RADIUS = "9999px 9999px 0.25rem 0.25rem";
 
+const MD_QUERY = "(min-width: 768px)";
+
+function useIsMd() {
+  const [isMd, setIsMd] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia(MD_QUERY);
+    const sync = () => setIsMd(mql.matches);
+    sync();
+    mql.addEventListener("change", sync);
+    return () => mql.removeEventListener("change", sync);
+  }, []);
+
+  return isMd;
+}
+
 function ExpandedCard({
   space,
   side,
-  compact,
+  size,
 }: {
   space: VenueSpace;
   side: "left" | "right";
-  compact?: boolean;
+  size: "mobile" | "desktop";
 }) {
+  const isMobile = size === "mobile";
+
   return (
     <Link
       href={`${VENUE_PATH}#${space.slug}`}
       className={`group relative z-30 block ${
-        compact
-          ? "w-[12.5rem] sm:w-[14rem] lg:w-[15.5rem]"
-          : "w-[15rem] sm:w-[17rem] lg:w-[19rem]"
+        isMobile
+          ? "w-[7.5rem]"
+          : "w-[12.5rem] sm:w-[14rem] lg:w-[15.5rem]"
       } ${
         side === "left"
           ? "animate-venue-expand-left"
@@ -52,12 +74,16 @@ function ExpandedCard({
       aria-label={`${space.name} — view on venue tour`}
     >
       <span
-        className="relative block bg-[#faf8f3] px-2.5 pb-3.5 pt-2.5 shadow-[0_22px_48px_-14px_rgba(26,38,32,0.42)] transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_28px_56px_-12px_rgba(26,38,32,0.46)] sm:px-3 sm:pb-4 sm:pt-3"
+        className={`relative block bg-[#faf8f3] shadow-[0_22px_48px_-14px_rgba(26,38,32,0.42)] transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_28px_56px_-12px_rgba(26,38,32,0.46)] ${
+          isMobile
+            ? "px-1 pb-1.5 pt-1"
+            : "px-2.5 pb-3.5 pt-2.5 sm:px-3 sm:pb-4 sm:pt-3"
+        }`}
         style={{ borderRadius: ARCH_CARD_RADIUS }}
       >
         <span
           className={`relative mx-auto block w-full overflow-hidden ${
-            compact ? "aspect-[3/3.7]" : "aspect-[3/4]"
+            isMobile ? "aspect-[3/3.35]" : "aspect-[3/3.7]"
           }`}
           style={{ borderRadius: ARCH_PHOTO_RADIUS }}
         >
@@ -66,7 +92,7 @@ function ExpandedCard({
             alt=""
             fill
             quality={95}
-            sizes="(max-width: 640px) 240px, 360px"
+            sizes="(max-width: 768px) 120px, 360px"
             className="object-cover transition duration-700 group-hover:scale-[1.03]"
             style={{
               objectPosition: objectPositionBySlug[space.slug] ?? "center",
@@ -74,19 +100,25 @@ function ExpandedCard({
           />
         </span>
 
-        <span className="mt-2.5 flex flex-col items-center px-1 text-center sm:mt-3">
+        <span
+          className={`flex flex-col items-center px-0.5 text-center ${
+            isMobile ? "mt-1" : "mt-2.5 sm:mt-3"
+          }`}
+        >
           <span
             className={`font-display leading-tight text-forest ${
-              compact
-                ? "text-[1.05rem] sm:text-[1.2rem]"
-                : "text-[1.25rem] sm:text-[1.4rem] lg:text-[1.55rem]"
+              isMobile
+                ? "text-[0.78rem]"
+                : "text-[1.05rem] sm:text-[1.2rem]"
             }`}
           >
             {space.name}
           </span>
           <span
             aria-hidden
-            className="mt-2 h-px w-8 bg-champagne/55 transition group-hover:w-11 group-hover:bg-champagne/75"
+            className={`h-px bg-champagne/55 transition group-hover:w-11 group-hover:bg-champagne/75 ${
+              isMobile ? "mt-1 w-5" : "mt-2 w-8"
+            }`}
           />
         </span>
       </span>
@@ -97,21 +129,29 @@ function ExpandedCard({
 /** Soft gray translucent funnel: pin tip → photo on the popout card */
 function LightFunnel({
   pin,
-  slot,
+  layout,
+  slotKey,
 }: {
   pin: MapPin;
-  slot: MapPinSlot;
+  layout: SlotLayout;
+  slotKey: string;
 }) {
-  const layout = SLOT_LAYOUT[slot];
   const pinX = pin.x;
   const pinY = pin.y;
   /** Aim at the arched photo (above the card’s title band) */
   const mouthY = layout.topPct - layout.mouthLift;
-  const mouthHalf = 6.5;
-  /** Extend past the map edge toward the off-map card */
-  const edgeX = layout.side === "left" ? -5 : 105;
+  const mouthHalf = layout.insetPct > 0 ? 4.5 : 6.5;
+  /** Mouth sits at the card’s near edge; past the map edge on desktop overhang */
+  const edgeX =
+    layout.side === "left"
+      ? layout.insetPct > 0
+        ? layout.insetPct
+        : -5
+      : layout.insetPct > 0
+        ? 100 - layout.insetPct
+        : 105;
   const tipHalf = 0.55;
-  const fillId = `funnel-fill-${slot}`;
+  const fillId = `funnel-fill-${slotKey}`;
 
   const tipTop = `${pinX},${pinY - tipHalf}`;
   const tipBot = `${pinX},${pinY + tipHalf}`;
@@ -144,23 +184,72 @@ function LightFunnel({
   );
 }
 
+function PopoutAnchor({
+  layout,
+  children,
+}: {
+  layout: SlotLayout;
+  children: ReactNode;
+}) {
+  const inset = layout.insetPct > 0;
+  const sideStyle =
+    layout.side === "left"
+      ? { left: `${layout.insetPct}%`, right: "auto" as const }
+      : { right: `${layout.insetPct}%`, left: "auto" as const };
+
+  return (
+    <div
+      className="pointer-events-none absolute z-30 h-0 w-0"
+      style={{
+        top: `${layout.topPct}%`,
+        ...sideStyle,
+      }}
+    >
+      <div
+        className={`pointer-events-auto absolute top-0 -translate-y-1/2 ${
+          inset
+            ? layout.side === "left"
+              ? "left-0"
+              : "right-0"
+            : layout.side === "left"
+              ? "right-[-0.75rem] sm:right-[-0.5rem]"
+              : "left-[-0.75rem] sm:left-[-0.5rem]"
+        }`}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export function VenueMapExplorer({ spaces }: { spaces: VenueSpace[] }) {
   const spaceBySlug = useMemo(() => {
     return new Map(spaces.map((s) => [s.slug, s]));
   }, [spaces]);
 
-  const [slotSlug, setSlotSlug] = useState<Record<MapPinSlot, string>>({
+  const isMd = useIsMd();
+
+  const [desktopSlots, setDesktopSlots] = useState<Record<MapPinSlot, string>>({
     ...SLOT_DEFAULTS,
   });
+  const [mobileSlots, setMobileSlots] = useState<
+    Record<MapPinMobileSlot, string>
+  >({ ...MOBILE_SLOT_DEFAULTS });
 
   const selectPin = (pin: MapPin) => {
-    setSlotSlug((prev) => ({ ...prev, [pin.slot]: pin.spaceSlug }));
+    setDesktopSlots((prev) => ({ ...prev, [pin.slot]: pin.spaceSlug }));
+    setMobileSlots((prev) => ({
+      ...prev,
+      [pin.mobileSlot]: pin.spaceSlug,
+    }));
   };
+
+  const activeSlotOrder = isMd ? DESKTOP_SLOT_ORDER : MOBILE_SLOT_ORDER;
 
   return (
     <div className="mt-5 md:mt-6">
-      <div className="relative mx-auto w-full max-w-xl lg:max-w-2xl">
-        <div className="relative mx-[-4.5rem] px-[4.5rem] sm:mx-[-6.5rem] sm:px-[6.5rem] lg:mx-[-8rem] lg:px-[8rem]">
+      <div className="relative mx-auto w-full max-w-xl overflow-x-clip md:overflow-visible lg:max-w-2xl">
+        <div className="relative mx-0 px-0 md:mx-[-6.5rem] md:px-[6.5rem] lg:mx-[-8rem] lg:px-[8rem]">
           <div className="relative overflow-visible">
             <Image
               src={MAP_IMAGE}
@@ -179,11 +268,23 @@ export function VenueMapExplorer({ spaces }: { spaces: VenueSpace[] }) {
               preserveAspectRatio="none"
               aria-hidden
             >
-              {SLOT_ORDER.map((slot) => {
-                const slug = slotSlug[slot];
+              {activeSlotOrder.map((slot) => {
+                const slug = isMd
+                  ? desktopSlots[slot as MapPinSlot]
+                  : mobileSlots[slot as MapPinMobileSlot];
                 const pin = mapPins.find((p) => p.spaceSlug === slug);
                 if (!pin) return null;
-                return <LightFunnel key={slot} pin={pin} slot={slot} />;
+                const layout = isMd
+                  ? SLOT_LAYOUT[slot as MapPinSlot]
+                  : MOBILE_SLOT_LAYOUT[slot as MapPinMobileSlot];
+                return (
+                  <LightFunnel
+                    key={`${isMd ? "d" : "m"}-${slot}`}
+                    pin={pin}
+                    layout={layout}
+                    slotKey={`${isMd ? "d" : "m"}-${slot}`}
+                  />
+                );
               })}
             </svg>
 
@@ -191,7 +292,9 @@ export function VenueMapExplorer({ spaces }: { spaces: VenueSpace[] }) {
             {mapPins.map((pin) => {
               const space = spaceBySlug.get(pin.spaceSlug);
               if (!space) return null;
-              const isOpen = slotSlug[pin.slot] === pin.spaceSlug;
+              const isOpen = isMd
+                ? desktopSlots[pin.slot] === pin.spaceSlug
+                : mobileSlots[pin.mobileSlot] === pin.spaceSlug;
 
               return (
                 <button
@@ -210,37 +313,25 @@ export function VenueMapExplorer({ spaces }: { spaces: VenueSpace[] }) {
               );
             })}
 
-            {SLOT_ORDER.map((slot) => {
-              const slug = slotSlug[slot];
+            {activeSlotOrder.map((slot) => {
+              const slug = isMd
+                ? desktopSlots[slot as MapPinSlot]
+                : mobileSlots[slot as MapPinMobileSlot];
               const space = spaceBySlug.get(slug);
-              const layout = SLOT_LAYOUT[slot];
+              const layout = isMd
+                ? SLOT_LAYOUT[slot as MapPinSlot]
+                : MOBILE_SLOT_LAYOUT[slot as MapPinMobileSlot];
               if (!space) return null;
 
               return (
-                <div
-                  key={slot}
-                  className="pointer-events-none absolute z-30 h-0 w-0"
-                  style={{
-                    top: `${layout.topPct}%`,
-                    left: layout.side === "left" ? 0 : "auto",
-                    right: layout.side === "right" ? 0 : "auto",
-                  }}
-                >
-                  <div
-                    className={`pointer-events-auto absolute top-0 -translate-y-1/2 ${
-                      layout.side === "left"
-                        ? "right-[-0.75rem] sm:right-[-0.5rem]"
-                        : "left-[-0.75rem] sm:left-[-0.5rem]"
-                    }`}
-                  >
-                    <ExpandedCard
-                      key={space.slug}
-                      space={space}
-                      side={layout.side}
-                      compact
-                    />
-                  </div>
-                </div>
+                <PopoutAnchor key={`${isMd ? "d" : "m"}-${slot}`} layout={layout}>
+                  <ExpandedCard
+                    key={space.slug}
+                    space={space}
+                    side={layout.side}
+                    size={isMd ? "desktop" : "mobile"}
+                  />
+                </PopoutAnchor>
               );
             })}
           </div>
