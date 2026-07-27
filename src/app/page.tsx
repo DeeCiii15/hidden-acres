@@ -1,65 +1,158 @@
 import Image from "next/image";
+import { Button } from "@/components/Button";
+import { CtaBand } from "@/components/CtaBand";
+import { JsonLd } from "@/components/JsonLd";
+import { RelatedPortfolio } from "@/components/RelatedPortfolio";
+import { Reveal } from "@/components/Reveal";
+import { Testimonials } from "@/components/Testimonials";
+import { VenueMapExplorer } from "@/components/VenueMapExplorer";
+import { media } from "@/lib/media";
+import { getFeaturedWeddings } from "@/lib/portfolioData";
+import {
+  ADDRESS,
+  CONTACT,
+  CONTACT_PATH,
+  getSiteUrl,
+  HOME_DESCRIPTION,
+  HOME_TITLE,
+  SITE_MOOD,
+  SITE_NAME,
+  VENUE_PATH,
+  WEDDING_PATH,
+} from "@/lib/siteConfig";
+import { testimonials } from "@/lib/testimonials";
+import { venueSpaces } from "@/lib/venueData";
 
-export default function Home() {
+export default function HomePage() {
+  const featured = getFeaturedWeddings(5);
+  const siteUrl = getSiteUrl();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WeddingVenue",
+          name: SITE_NAME,
+          description: HOME_DESCRIPTION,
+          url: siteUrl,
+          telephone: CONTACT.phoneHref.replace("tel:", ""),
+          email: CONTACT.email,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: ADDRESS.street,
+            addressLocality: ADDRESS.city,
+            addressRegion: ADDRESS.state,
+            postalCode: ADDRESS.zip,
+            addressCountry: "US",
+          },
+        }}
+      />
+
+      <section
+        id="hero-surface"
+        className="relative min-h-[100svh] overflow-hidden"
+      >
+        <div className="absolute inset-0">
+          <Image
+            src={media.hero}
+            alt={media.heroAlt}
+            fill
+            priority
+            quality={95}
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/85 via-forest-deep/35 to-black/25" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+
+        <div className="relative z-10 flex min-h-[100svh] flex-col justify-end px-5 pb-16 pt-28 md:px-8 md:pb-24">
+          <div className="mx-auto w-full max-w-7xl">
+            <p className="eyebrow animate-rise text-champagne-soft">
+              Marion, SC · Pee Dee · Wedding weekends
+            </p>
+            <h1 className="animate-rise-delay-1 mt-5 max-w-4xl font-script text-5xl leading-[1.02] text-cream md:text-7xl lg:text-[5.5rem]">
+              Hidden Acres
+            </h1>
+            <p className="animate-rise-delay-2 mt-4 max-w-xl font-display text-2xl leading-snug text-cream/95 md:text-3xl lg:text-4xl">
+              {SITE_MOOD}
+            </p>
+            <div className="animate-rise-delay-3 mt-9 flex flex-wrap gap-3">
+              <Button href={VENUE_PATH} variant="onDark">
+                Tour the venue
+              </Button>
+              <Button href={CONTACT_PATH} variant="ghost">
+                Inquire
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
+        <Reveal className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="relative aspect-[4/5] overflow-hidden md:aspect-[5/4]">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src={media.welcome}
+              alt={media.welcomeAlt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-[center_30%]"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+          <div>
+            <h2 className="font-script text-4xl leading-snug text-forest md:text-5xl lg:text-6xl">
+              A private wedding weekend in Marion, SC
+            </h2>
+            <div className="mt-6 space-y-4 text-base leading-relaxed text-ink md:text-lg">
+              <p>
+                Hidden Acres is the perfect location for your dream wedding. It
+                offers rustic charm, natural beauty, a secluded pastoral
+                setting, and unexpected modern amenities.
+              </p>
+              <p>
+                Neatly tucked into the countryside (just 10 minutes from
+                historic downtown Marion, 30 minutes from Florence, and one hour
+                from Myrtle Beach), Hidden Acres is a beautiful setting for your
+                dream wedding.
+              </p>
+              <p>
+                Let us help you create memories that you&apos;ll cherish for a
+                lifetime.
+              </p>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href={VENUE_PATH} variant="secondary">
+                Explore every space
+              </Button>
+              <Button href={WEDDING_PATH}>Wedding details</Button>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="border-y border-stroke bg-paper-deep/60 py-12 md:py-16">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <Reveal>
+            <h2 className="text-center font-script text-4xl text-forest md:text-5xl lg:text-6xl">
+              The venue
+            </h2>
+          </Reveal>
+          <VenueMapExplorer spaces={venueSpaces} />
         </div>
-      </main>
-    </div>
+      </section>
+
+      <RelatedPortfolio weddings={featured} />
+
+      <Testimonials items={testimonials} />
+
+      <CtaBand
+        headline="Ready to walk the grounds?"
+        supporting="Tell us your date and guest count — we’d love to show you Hidden Acres."
+        buttonLabel="Reach out"
+      />
+
+      <span className="sr-only">{HOME_TITLE}</span>
+    </>
   );
 }

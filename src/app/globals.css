@@ -1,26 +1,795 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Warm paper + woodland estate — kin to TRR warmth, not a clone */
+  --paper: #f3f0e8;
+  --paper-deep: #e8e3d8;
+  --cream: #faf8f3;
+  --forest: #2c3b32;
+  --forest-deep: #1a2620;
+  --sage: #8a9878;
+  --sage-soft: #c4ceba;
+  --mist: #ece9e0;
+  --linen: #f3f0e8;
+  --champagne: #9c8160;
+  --champagne-soft: #d2c1a6;
+  --ink: #1f261f;
+  --muted: #4a534c;
+  --bark: #3a3530;
+  --stroke: color-mix(in oklab, var(--bark) 14%, transparent);
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-sage: var(--sage);
+  --color-sage-soft: var(--sage-soft);
+  --color-mist: var(--mist);
+  --color-linen: var(--linen);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-cream: var(--cream);
+  --color-champagne: var(--champagne);
+  --color-champagne-soft: var(--champagne-soft);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-bark: var(--bark);
+  --color-stroke: var(--stroke);
+  --font-sans: var(--font-josefin);
+  --font-display: var(--font-cormorant);
+  --font-script: var(--font-italianno);
+  --font-ui: var(--font-josefin);
+  --font-body: var(--font-lora);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Georgia, "Times New Roman", serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--sage) 35%, white);
+  color: var(--forest-deep);
+}
+
+/* Italianno leads the site voice on primary titles */
+h1,
+h1.font-display {
+  font-family: var(--font-script), cursive;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+}
+
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), "Palatino Linotype", Palatino, serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+h2.font-script,
+h3.font-script,
+.font-script {
+  font-family: var(--font-script), cursive;
+  font-weight: 400;
+}
+
+.font-ui {
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+}
+
+a {
+  text-decoration: none;
+}
+
+.site-shell {
+  background:
+    radial-gradient(
+      1100px 520px at 8% -8%,
+      color-mix(in oklab, var(--sage-soft) 40%, transparent),
+      transparent 58%
+    ),
+    radial-gradient(
+      800px 420px at 100% 0%,
+      color-mix(in oklab, var(--champagne-soft) 32%, transparent),
+      transparent 52%
+    ),
+    linear-gradient(180deg, var(--cream) 0%, var(--paper) 22%, var(--paper) 100%);
+  min-height: 100vh;
+}
+
+.hero-media {
+  animation: hero-ken 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes hero-ken {
+  from {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.06) translate3d(-0.4%, 0.25%, 0);
+  }
+}
+
+/* Hide native scrollbars while keeping scroll / snap behavior */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes draw-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes venue-expand-left {
+  from {
+    opacity: 0;
+    transform: translateX(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes venue-expand-right {
+  from {
+    opacity: 0;
+    transform: translateX(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-venue-expand-left {
+  animation: venue-expand-left 0.35s ease-out both;
+}
+
+.animate-venue-expand-right {
+  animation: venue-expand-right 0.35s ease-out both;
+}
+
+.animate-rise {
+  animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-rise-delay-1 {
+  animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+}
+
+.animate-rise-delay-2 {
+  animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+}
+
+.animate-rise-delay-3 {
+  animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Love-letters testimonials — linen atmosphere + letter-from-envelope */
+.love-letters-linen {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      color-mix(in oklab, var(--bark) 2.2%, transparent) 3px,
+      color-mix(in oklab, var(--bark) 2.2%, transparent) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      color-mix(in oklab, var(--bark) 1.6%, transparent) 3px,
+      color-mix(in oklab, var(--bark) 1.6%, transparent) 4px
+    );
+}
+
+@keyframes letter-float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes seal-soft {
+  from {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  to {
+    filter: brightness(1.06);
+    transform: scale(1.04);
+  }
+}
+
+/*
+  Unveil: continue from the pocket peek, slide further out of the
+  mouth (still tucked behind the pocket), then come forward and
+  settle slightly down covering the wax seal. No scale/opacity spawn.
+  Peak → settle handoff is tight so the pause between up and down is brief.
+*/
+@keyframes letter-unveil {
+  0% {
+    z-index: 3;
+    bottom: var(--letter-unveil-from-bottom);
+    max-height: var(--letter-unveil-from-height);
+    transform: translate3d(0, calc(-1 * var(--letter-unveil-from)), 0);
+  }
+  44% {
+    /* Drawn high out of the mouth; still behind the pocket face */
+    z-index: 3;
+    bottom: var(--letter-unveil-from-bottom);
+    max-height: var(--letter-peek-max);
+    transform: translate3d(0, calc(-1 * var(--letter-peak)), 0);
+  }
+  50% {
+    /* Flip in front of the pocket to rest over the seal */
+    z-index: 5;
+    bottom: var(--letter-unveil-from-bottom);
+    max-height: var(--letter-peek-max);
+    transform: translate3d(0, calc(-1 * var(--letter-peak)), 0);
+  }
+  100% {
+    z-index: 5;
+    bottom: var(--letter-sheet-bottom);
+    max-height: var(--letter-peek-max);
+    transform: translate3d(0, calc(-1 * var(--letter-lift)), 0);
+  }
+}
+
+.love-letter-unit {
+  /* lift is % of the letter sheet’s own height */
+  --letter-lift: 18%;
+  --letter-peak: 40%;
+  /* Cap how tall inactive peeks can grow (long quotes stay clipped) */
+  --letter-peek-max: 7.75rem;
+  --letter-sheet-bottom: 40%;
+  /* Stable peek origin for unveil (matches in-view side cards) */
+  --letter-unveil-from: 24%;
+  --letter-unveil-from-bottom: 40%;
+  --letter-unveil-from-height: 7.75rem;
+  position: relative;
+  width: 100%;
+  /* Tall enough for envelope only — letter pop overflows into scroller pt */
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0.78;
+  transition: opacity 0.45s ease;
+}
+
+.love-letter-unit.is-active {
+  opacity: 1;
+}
+
+/* Nearby envelopes peek enough to read the opening of the quote */
+.love-letters.is-in-view .love-letter-unit:not(.is-unveiled) {
+  --letter-lift: 24%;
+}
+
+.love-letter-unit.is-active:not(.is-unveiled) {
+  --letter-lift: 26%;
+}
+
+/*
+  Open letter: emerges high, then rests lower so the sheet
+  covers the wax seal while the envelope name stays readable.
+*/
+.love-letter-unit.is-unveiled {
+  --letter-lift: 22%;
+  --letter-peak: 42%;
+  --letter-sheet-bottom: 26%;
+  /* Taller than peeks, but capped so it stays over the envelope */
+  --letter-peek-max: 13.25rem;
+}
+
+.love-letter-unit:hover:not(.is-unveiled),
+.love-letter-unit:focus-within:not(.is-unveiled) {
+  opacity: 1;
+  --letter-lift: 26%;
+}
+
+.love-letter-float {
+  animation: letter-float 4.5s ease-in-out infinite alternate;
+}
+
+.love-letter-float .love-letter-seal {
+  animation: seal-soft 4.5s ease-in-out infinite alternate;
+}
+
+/* Sage-lined flap open upward above the envelope */
+.love-letter-flap-open {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: calc(100% - 0.9rem);
+  height: 3.25rem;
+  z-index: 1;
+  pointer-events: none;
+  transform-origin: center bottom;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s ease;
+}
+
+.love-letter-unit:not(.is-active) .love-letter-flap-open {
+  transform: scaleY(0.9) translateY(0.4rem);
+  opacity: 0.88;
+}
+
+.love-letter-flap-open-face {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--sage) 88%, var(--forest)) 0%,
+    var(--sage) 48%,
+    color-mix(in oklab, var(--sage) 75%, var(--sage-soft)) 100%
+  );
+  clip-path: polygon(0 100%, 50% 6%, 100% 100%);
+  box-shadow: 0 10px 22px -16px rgba(26, 38, 32, 0.45);
+}
+
+.love-letter-flap-open-face::after {
+  content: "";
+  position: absolute;
+  inset: 18% 22% 8%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in oklab, var(--forest) 8%, transparent)
+  );
+  clip-path: polygon(0 100%, 50% 12%, 100% 100%);
+  opacity: 0.35;
+}
+
+/* Envelope pocket body */
+.love-letter-envelope {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 1 / 0.9;
+  width: 100%;
+  /* Soft edge depth only — avoid heavy rectangular drop-shadow blob */
+  filter: drop-shadow(0 8px 14px rgba(26, 38, 32, 0.1));
+}
+
+.love-letter-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: linear-gradient(
+    165deg,
+    #f6f2e8 0%,
+    #f0ebe0 55%,
+    #e9e3d6 100%
+  );
+  border: 1px solid color-mix(in oklab, var(--forest) 10%, transparent);
+}
+
+.love-letter-lining {
+  position: absolute;
+  inset: 5% 6% auto;
+  height: 44%;
+  border-radius: 1px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--sage) 70%, var(--sage-soft)),
+    color-mix(in oklab, var(--sage) 85%, var(--forest))
+  );
+  opacity: 0.92;
+  clip-path: polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%);
+}
+
+/*
+  Cream letter sheet — tucked behind the pocket until unveiled,
+  then lifts in front so the full quote reads while the envelope
+  name/seal stay visible below.
+*/
+.love-letter-sheet {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  /* Anchor above the couple-name band on the envelope face */
+  bottom: var(--letter-sheet-bottom);
+  z-index: 3;
+  margin: 0;
+  padding: 0.95rem 0.9rem 1.45rem;
+  border-radius: 2px;
+  border: 1px solid color-mix(in oklab, var(--forest) 10%, transparent);
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--cream) 92%, white),
+    var(--cream)
+  );
+  box-shadow:
+    0 1px 0 color-mix(in oklab, white 55%, transparent),
+    0 14px 28px -18px rgba(26, 38, 32, 0.28);
+  transform: translate3d(0, calc(-1 * var(--letter-lift)), 0);
+  /* Inactive: fixed peek height so long quotes don’t stick out */
+  max-height: var(--letter-peek-max);
+  overflow: hidden;
+  /* Tuck / slide-back when leaving focus — springy so it feels like it retracts */
+  transition:
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    bottom 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease,
+    max-height 0.6s ease,
+    z-index 0s linear 0.28s;
+}
+
+.love-letter-unit:not(.is-unveiled) .love-letter-quote {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+}
+
+.love-letter-unit.is-unveiled .love-letter-sheet {
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 color-mix(in oklab, white 55%, transparent),
+    0 18px 36px -14px rgba(26, 38, 32, 0.32);
+  /* Keyframes own z-index/bottom/transform/max-height */
+  transition: box-shadow 0.45s ease;
+  animation: letter-unveil 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.love-letter-unit.is-unveiled .love-letter-quote {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  line-clamp: 7;
+  overflow: hidden;
+}
+
+.love-letter-expand {
+  position: absolute;
+  right: 0.55rem;
+  bottom: 0.35rem;
+  z-index: 2;
+  display: inline-flex;
+  height: 1.35rem;
+  width: 1.35rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in oklab, var(--forest) 16%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--cream) 88%, white);
+  color: var(--forest);
+  font-size: 0.7rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 10px -6px rgba(26, 38, 32, 0.35);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.love-letter-expand:hover,
+.love-letter-expand:focus-visible {
+  background: var(--sage);
+  border-color: color-mix(in oklab, var(--sage) 70%, var(--forest));
+  color: var(--cream);
+  outline: none;
+}
+
+.love-letter-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--forest-deep) 42%, transparent),
+      color-mix(in oklab, var(--bark) 48%, transparent)
+    );
+  backdrop-filter: blur(3px);
+}
+
+.love-letter-modal {
+  position: relative;
+  width: min(100%, 28rem);
+  max-height: min(82vh, 36rem);
+  overflow: auto;
+  padding: 1.75rem 1.6rem 2.15rem;
+  border-radius: 2px;
+  border: 1px solid color-mix(in oklab, var(--forest) 12%, transparent);
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--cream) 94%, white),
+      var(--cream) 55%,
+      color-mix(in oklab, var(--linen) 70%, var(--cream))
+    );
+  box-shadow:
+    0 1px 0 color-mix(in oklab, white 55%, transparent),
+    0 28px 60px -24px rgba(18, 28, 23, 0.55);
+}
+
+.love-letter-modal-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.75rem;
+  display: inline-flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in oklab, var(--forest) 14%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--paper) 80%, white);
+  color: var(--forest);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.love-letter-modal-close:hover,
+.love-letter-modal-close:focus-visible {
+  background: var(--sage-soft);
+  border-color: var(--sage);
+  outline: none;
+}
+
+.love-letter-modal-title {
+  margin: 0.65rem 0 0;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  line-height: 1.2;
+}
+
+.love-letter-modal-quote {
+  position: relative;
+  z-index: 1;
+  margin: 1.1rem 0 0;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+/* Front pocket — stays under the unveiled letter; name remains readable */
+.love-letter-pocket {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.love-letter-pocket-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: linear-gradient(
+    180deg,
+    #f4efe5 0%,
+    #f7f3ea 38%,
+    #faf7f0 100%
+  );
+  border: 1px solid color-mix(in oklab, var(--forest) 10%, transparent);
+  /* Open-envelope pocket: V notch at top so the letter reads as emerging */
+  clip-path: polygon(0% 0%, 50% 46%, 100% 0%, 100% 100%, 0% 100%);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, white 40%, transparent);
+}
+
+.love-letter-pocket-folds {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      122deg,
+      transparent 42%,
+      color-mix(in oklab, var(--forest) 7%, transparent) 49%,
+      transparent 56%
+    ),
+    linear-gradient(
+      -122deg,
+      transparent 42%,
+      color-mix(in oklab, var(--forest) 7%, transparent) 49%,
+      transparent 56%
+    );
+  opacity: 0.85;
+}
+
+.love-letter-pocket-name {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 16%;
+  margin: 0;
+  text-align: center;
+  font-size: clamp(0.88rem, 2.2vw, 1.08rem);
+  line-height: 1.2;
+}
+
+.love-letter-pocket-botanical {
+  position: absolute;
+  right: 4%;
+  bottom: 5%;
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+@media (min-width: 768px) {
+  .love-letter-unit {
+    --letter-lift: 18%;
+    --letter-peek-max: 8.75rem;
+    --letter-unveil-from: 26%;
+    --letter-unveil-from-height: 8.75rem;
+    min-height: 0;
+  }
+
+  .love-letters.is-in-view .love-letter-unit:not(.is-unveiled) {
+    --letter-lift: 26%;
+  }
+
+  .love-letter-unit.is-active:not(.is-unveiled) {
+    --letter-lift: 28%;
+  }
+
+  .love-letter-unit.is-unveiled {
+    --letter-lift: 24%;
+    --letter-peak: 44%;
+    --letter-sheet-bottom: 25%;
+    --letter-peek-max: 14rem;
+  }
+
+  .love-letter-unit:hover:not(.is-unveiled),
+  .love-letter-unit:focus-within:not(.is-unveiled) {
+    --letter-lift: 28%;
+  }
+
+  .love-letter-sheet {
+    padding: 1.1rem 1.05rem 1.65rem;
+  }
+
+  .love-letter-flap-open {
+    height: 3.6rem;
+  }
+}
+
+.accent-line {
+  display: block;
+  height: 1px;
+  width: 4rem;
+  background: linear-gradient(90deg, var(--champagne), transparent);
+  transform-origin: left;
+  animation: draw-line 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+.eyebrow {
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  display: inline-flex;
+}
+
+.prose-venue {
+  font-size: 1.08rem;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+.prose-venue p + p {
+  margin-top: 1.1rem;
+}
+
+.frame-overlap {
+  box-shadow: 0 24px 50px -28px rgba(26, 38, 32, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-media,
+  .animate-rise,
+  .animate-rise-delay-1,
+  .animate-rise-delay-2,
+  .animate-rise-delay-3,
+  .accent-line,
+  .love-letter-float,
+  .love-letter-float .love-letter-seal,
+  .love-letter-unit.is-unveiled .love-letter-sheet {
+    animation: none !important;
+  }
+
+  .love-letter-unit {
+    --letter-lift: 20%;
+  }
+
+  .love-letters.is-in-view .love-letter-unit:not(.is-unveiled),
+  .love-letter-unit.is-active:not(.is-unveiled),
+  .love-letter-unit:hover:not(.is-unveiled),
+  .love-letter-unit:focus-within:not(.is-unveiled) {
+    --letter-lift: 24%;
+  }
+
+  .love-letter-unit.is-unveiled {
+    --letter-lift: 22%;
+    --letter-sheet-bottom: 26%;
+    --letter-peek-max: 12.5rem;
+  }
+
+  .love-letter-unit.is-unveiled .love-letter-sheet {
+    z-index: 5;
+    bottom: var(--letter-sheet-bottom);
+    max-height: var(--letter-peek-max);
+    transform: translate3d(0, calc(-1 * var(--letter-lift)), 0);
+  }
+
+  .love-letter-sheet,
+  .love-letter-flap-open {
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
