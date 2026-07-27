@@ -64,7 +64,7 @@ function ExpandedCard({
       href={`${VENUE_PATH}#${space.slug}`}
       className={`group relative z-30 block ${
         isMobile
-          ? "w-[7.5rem]"
+          ? "w-[6.5rem]"
           : "w-[12.5rem] sm:w-[14rem] lg:w-[15.5rem]"
       } ${
         side === "left"
@@ -92,7 +92,7 @@ function ExpandedCard({
             alt=""
             fill
             quality={95}
-            sizes="(max-width: 768px) 120px, 360px"
+            sizes="(max-width: 768px) 104px, 360px"
             className="object-cover transition duration-700 group-hover:scale-[1.03]"
             style={{
               objectPosition: objectPositionBySlug[space.slug] ?? "center",
@@ -108,18 +108,21 @@ function ExpandedCard({
           <span
             className={`font-display leading-tight text-forest ${
               isMobile
-                ? "text-[0.78rem]"
+                ? "text-[0.7rem]"
                 : "text-[1.05rem] sm:text-[1.2rem]"
             }`}
           >
             {space.name}
           </span>
           <span
-            aria-hidden
-            className={`h-px bg-champagne/55 transition group-hover:w-11 group-hover:bg-champagne/75 ${
-              isMobile ? "mt-1 w-5" : "mt-2 w-8"
+            className={`font-ui text-champagne transition group-hover:text-forest ${
+              isMobile
+                ? "mt-0.5 text-[7px] uppercase tracking-[0.12em]"
+                : "mt-1.5 text-[9px] uppercase tracking-[0.16em] sm:mt-2 sm:text-[10px]"
             }`}
-          />
+          >
+            See this space
+          </span>
         </span>
       </span>
     </Link>
@@ -339,7 +342,7 @@ export function VenueMapExplorer({ spaces }: { spaces: VenueSpace[] }) {
       </div>
 
       <p className="mt-5 text-center font-ui text-[10px] uppercase tracking-[0.18em] text-muted">
-        Tap a map pin — each side keeps its spot while you switch spaces
+        Tap a pin to see more details about this space
       </p>
     </div>
   );

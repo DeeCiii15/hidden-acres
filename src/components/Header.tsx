@@ -95,10 +95,10 @@ export function Header() {
             <SiteLogo
               tone={onDarkHero ? "light" : "dark"}
               priority
-              className="h-8 w-auto shrink-0 scale-100 contrast-150 drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)] sm:h-[4.25rem] sm:scale-[1.38] md:h-[4.75rem] md:scale-[1.45]"
+              className="h-12 w-auto shrink-0 scale-100 contrast-150 drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)] sm:h-[4.25rem] sm:scale-[1.38] md:h-[4.75rem] md:scale-[1.45]"
             />
             <span
-              className={`font-script truncate text-[1.25rem] leading-none transition-colors duration-300 sm:text-[2.15rem] md:text-[2.55rem] ${
+              className={`font-script truncate text-[1.4rem] leading-none transition-colors duration-300 sm:text-[2.15rem] md:text-[2.55rem] ${
                 onDarkHero
                   ? "text-white [text-shadow:0_1px_18px_rgba(0,0,0,0.35)]"
                   : "text-[#2c3b32]"

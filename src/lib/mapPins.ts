@@ -49,10 +49,10 @@ export const SLOT_LAYOUT: Record<MapPinSlot, SlotLayout> = {
  * top-left overlaps into the map; mid-right sits in the empty field / little-venue area.
  */
 export const MOBILE_SLOT_LAYOUT: Record<MapPinMobileSlot, SlotLayout> = {
-  /** Overlaps into the top-left of the map art */
-  "top-left": { side: "left", topPct: 17, insetPct: 10, mouthLift: 4 },
-  /** Right empty field — keep clear of the central venue cluster */
-  "mid-right": { side: "right", topPct: 50, insetPct: 5, mouthLift: 4 },
+  /** Further west (toward left edge) so Chapel card clears its pin */
+  "top-left": { side: "left", topPct: 17, insetPct: 6, mouthLift: 4 },
+  /** Higher / further east in the right field — clear of the courtyard cluster */
+  "mid-right": { side: "right", topPct: 40, insetPct: 2, mouthLift: 4 },
 };
 
 export const SLOT_DEFAULTS: Record<MapPinSlot, string> = {
