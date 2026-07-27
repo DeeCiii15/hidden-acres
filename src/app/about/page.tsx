@@ -96,7 +96,7 @@ export default function AboutPage() {
             <a
               key={item.href}
               href={item.href}
-              className="font-ui rounded-full border border-stroke bg-cream px-4 py-2 text-[11px] uppercase tracking-[0.16em] text-muted hover:text-forest"
+              className="font-ui rounded-full border border-stroke bg-cream px-4 py-2 text-sm uppercase tracking-[0.16em] text-muted hover:text-forest"
             >
               {item.label}
             </a>
@@ -205,13 +205,13 @@ export default function AboutPage() {
                 href={`https://maps.google.com/?q=${mapsQuery}`}
                 target="_blank"
                 rel="noreferrer"
-                className="font-ui inline-flex rounded-sm border border-forest/20 px-5 py-3 text-[11px] uppercase tracking-[0.18em] text-forest hover:bg-forest/5"
+                className="font-ui inline-flex rounded-sm border border-forest/20 px-5 py-3.5 text-sm uppercase tracking-[0.16em] text-forest hover:bg-forest/5"
               >
                 Open in Google Maps
               </a>
               <Link
                 href={`mailto:${CONTACT.email}`}
-                className="font-ui inline-flex px-2 py-3 text-[11px] uppercase tracking-[0.18em] text-champagne"
+                className="font-ui inline-flex px-2 py-3.5 text-sm uppercase tracking-[0.16em] text-champagne"
               >
                 Email for help →
               </Link>

@@ -31,6 +31,29 @@ export const SOCIAL = {
   pinterest: "https://www.pinterest.com/hiddenacressc/",
 };
 
+/** Shared prompt for the Love Letters review / award logo group */
+export const REVIEWS_CAPTION = "Check out what people say about us";
+
+/** Review / award destinations shown under Love Letters */
+export const REVIEWS = {
+  theKnot: {
+    href: "https://www.theknot.com/marketplace/hidden-acres-marion-sc-1025516",
+    label: "The Knot — Hidden Acres reviews & listing",
+    logo: "/brand/the-knot.svg",
+  },
+  google: {
+    // Search deep-link that opens the venue’s Google reviews panel (#lrd=…)
+    href: "https://www.google.com/search?q=hidden+acres+google+reveiws&rlz=1C1GCEJ_enUS874US874&oq=hidden+acres+google+reveiws&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIJCAEQIRgKGKABMgkIAhAhGAoYoAEyCQgDECEYChigATIJCAQQIRgKGKABMgkIBRAhGAoYoAEyBwgGECEYqwIyBwgHECEYnwUyBwgIECEYnwUyBwgJECEYjwLSAQgzMzI2ajBqNKgCALACAQ&sourceid=chrome&source=chrome.ob&ie=UTF-8#lrd=0x89aab31a8792f40b:0x6e4e46a5a6775bd1,1,,,,",
+    label: "Google Reviews — Hidden Acres",
+    logo: "/brand/google-reviews.svg",
+  },
+  bestOfPeeDee: {
+    href: "https://scnow.com/contests/",
+    label: "Best of the Pee Dee 2025",
+    logo: "/brand/best-of-pee-dee-2025-badge.png",
+  },
+} as const;
+
 /** Venue tour film from hiddenacresweddings.com/venue-video */
 export const VENUE_TOUR_VIDEO = {
   youtubeId: "-Ti2LT0XOeE",

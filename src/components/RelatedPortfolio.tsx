@@ -52,7 +52,7 @@ export function RelatedPortfolio({
         </div>
         <Link
           href={PORTFOLIO_PATH}
-          className="font-ui text-[11px] uppercase tracking-[0.18em] text-champagne transition hover:text-forest"
+          className="font-ui text-sm uppercase tracking-[0.16em] text-champagne transition hover:text-forest"
         >
           {ctaLabel} →
         </Link>

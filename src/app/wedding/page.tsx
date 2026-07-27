@@ -89,7 +89,7 @@ export default function WeddingPage() {
           <Button href={CONTACT_PATH}>Call or email for package pricing</Button>
           <a
             href={CONTACT.phoneHref}
-            className="font-ui inline-flex items-center px-2 text-[11px] uppercase tracking-[0.18em] text-champagne hover:text-forest"
+            className="font-ui inline-flex items-center px-2 text-sm uppercase tracking-[0.16em] text-champagne hover:text-forest"
           >
             {CONTACT.phoneDisplay}
           </a>
@@ -161,7 +161,7 @@ export default function WeddingPage() {
                           <Link
                             key={link.href}
                             href={link.href}
-                            className="font-ui text-[11px] uppercase tracking-[0.16em] text-champagne hover:text-forest"
+                            className="font-ui text-sm uppercase tracking-[0.16em] text-champagne hover:text-forest"
                           >
                             {link.label} →
                           </Link>

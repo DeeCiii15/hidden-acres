@@ -70,7 +70,7 @@ export function FloatingContactBar() {
       <div className="pointer-events-auto flex max-w-full items-center gap-2.5 rounded-full border border-cream/15 bg-forest-deep/95 px-3.5 py-2 text-cream shadow-[0_18px_40px_-18px_rgba(18,28,23,0.75)] backdrop-blur-md md:gap-3 md:px-4 md:py-2.5">
         <a
           href={CONTACT.phoneHref}
-          className="font-ui inline-flex items-center gap-2 text-[11px] tracking-[0.04em] text-cream/90 transition hover:text-cream"
+          className="font-ui inline-flex items-center gap-2 text-sm tracking-[0.04em] text-cream/90 transition hover:text-cream"
           aria-label={`Call ${CONTACT.phoneDisplay}`}
         >
           <PhoneIcon className="h-3.5 w-3.5 shrink-0" />

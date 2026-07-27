@@ -86,7 +86,7 @@ export default function VenuePage() {
         <div className="mx-auto flex max-w-7xl gap-x-6 gap-y-2 overflow-x-auto px-5 py-4 md:px-8">
           <a
             href="#video-tour"
-            className="font-ui shrink-0 text-[11px] uppercase tracking-[0.16em] text-[#2c3b32]/70 transition hover:text-[#2c3b32]"
+            className="font-ui shrink-0 text-sm uppercase tracking-[0.16em] text-[#2c3b32]/70 transition hover:text-[#2c3b32]"
           >
             Video tour
           </a>
@@ -94,7 +94,7 @@ export default function VenuePage() {
             <a
               key={space.slug}
               href={`#${space.slug}`}
-              className="font-ui shrink-0 text-[11px] uppercase tracking-[0.16em] text-[#2c3b32]/70 transition hover:text-[#2c3b32]"
+              className="font-ui shrink-0 text-sm uppercase tracking-[0.16em] text-[#2c3b32]/70 transition hover:text-[#2c3b32]"
             >
               {space.navLabel}
             </a>
@@ -197,7 +197,7 @@ export default function VenuePage() {
                     {related[0] && (
                       <Link
                         href={`/portfolio/${related[0].slug}`}
-                        className="font-ui text-[11px] uppercase tracking-[0.18em] text-champagne hover:text-forest"
+                        className="font-ui text-sm uppercase tracking-[0.16em] text-champagne hover:text-forest"
                       >
                         See it in a real wedding →
                       </Link>

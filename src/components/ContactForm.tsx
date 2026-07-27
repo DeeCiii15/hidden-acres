@@ -88,7 +88,7 @@ export function ContactForm() {
       </label>
       <button
         type="submit"
-        className="font-ui inline-flex items-center justify-center bg-[#2c3b32] px-6 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-white transition hover:bg-[#1a2620]"
+        className="font-ui inline-flex items-center justify-center bg-[#2c3b32] px-6 py-3.5 text-sm font-medium uppercase tracking-[0.16em] text-white transition hover:bg-[#1a2620]"
       >
         Send inquiry
       </button>

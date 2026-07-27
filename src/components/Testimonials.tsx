@@ -8,8 +8,34 @@ import {
   useRef,
   useState,
 } from "react";
+import Image from "next/image";
+import { REVIEWS, REVIEWS_CAPTION } from "@/lib/siteConfig";
 import { type Testimonial } from "@/lib/testimonials";
 import { Reveal } from "./Reveal";
+
+const REVIEW_LINKS = [
+  {
+    ...REVIEWS.theKnot,
+    className: "h-8 w-[7.5rem] sm:h-9 sm:w-[8.75rem]",
+    imgClassName: "h-full w-full object-contain object-center",
+    width: 140,
+    height: 40,
+  },
+  {
+    ...REVIEWS.google,
+    className: "h-8 w-[10rem] sm:h-9 sm:w-[11.5rem]",
+    imgClassName: "h-full w-full object-contain object-center",
+    width: 180,
+    height: 40,
+  },
+  {
+    ...REVIEWS.bestOfPeeDee,
+    className: "h-14 w-14 sm:h-16 sm:w-16",
+    imgClassName: "h-full w-full rounded-full object-cover object-center shadow-[0_4px_14px_-6px_rgba(26,38,32,0.35)]",
+    width: 64,
+    height: 64,
+  },
+] as const;
 
 function BotanicalCorner({ className = "" }: { className?: string }) {
   return (
@@ -543,6 +569,36 @@ export function Testimonials({
                 />
               ))}
             </div>
+
+            <nav
+              aria-label="Reviews and awards"
+              className="mt-4 flex w-full max-w-lg flex-col items-center gap-4 border-t border-forest/10 pt-6 sm:mt-5 sm:gap-5 md:mt-6 md:gap-5 md:pt-7"
+            >
+              <div className="flex w-full flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:gap-x-10 md:gap-x-12">
+                {REVIEW_LINKS.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${REVIEWS_CAPTION} — ${link.label}`}
+                    className={`inline-flex items-center justify-center opacity-[0.88] transition hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sage ${link.className}`}
+                  >
+                    <Image
+                      src={link.logo}
+                      alt=""
+                      width={link.width}
+                      height={link.height}
+                      className={link.imgClassName}
+                      unoptimized
+                    />
+                  </a>
+                ))}
+              </div>
+              <p className="max-w-sm text-center font-body text-sm italic leading-snug text-muted md:text-[0.9375rem]">
+                {REVIEWS_CAPTION}
+              </p>
+            </nav>
           </div>
         </div>
       </div>

@@ -117,7 +117,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`font-ui px-3 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${
+                  className={`font-ui px-3.5 py-2 text-sm uppercase tracking-[0.16em] transition-colors duration-300 ${
                     onDarkHero
                       ? active
                         ? "text-white [text-shadow:0_1px_12px_rgba(0,0,0,0.3)]"
@@ -133,7 +133,7 @@ export function Header() {
             })}
             <Link
               href={CONTACT_PATH}
-              className={`font-ui ml-3 px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition duration-300 ${
+              className={`font-ui ml-3 px-5 py-2.5 text-sm uppercase tracking-[0.16em] transition duration-300 ${
                 onDarkHero
                   ? "border border-white/70 text-white hover:bg-white/10 [text-shadow:0_1px_10px_rgba(0,0,0,0.25)]"
                   : "bg-[#2c3b32] text-white hover:bg-[#1a2620]"
@@ -178,7 +178,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="font-ui border-b border-[#2c3b32]/10 py-3.5 text-xs uppercase tracking-[0.18em] text-[#2c3b32]"
+              className="font-ui border-b border-[#2c3b32]/10 py-3.5 text-sm uppercase tracking-[0.16em] text-[#2c3b32]"
               onClick={() => setOpen(false)}
             >
               {link.label}
@@ -186,7 +186,7 @@ export function Header() {
           ))}
           <Link
             href={CONTACT_PATH}
-            className="font-ui mt-4 inline-flex items-center justify-center bg-[#2c3b32] px-4 py-3 text-xs uppercase tracking-[0.18em] text-white"
+            className="font-ui mt-4 inline-flex items-center justify-center bg-[#2c3b32] px-5 py-3.5 text-sm uppercase tracking-[0.16em] text-white"
             onClick={() => setOpen(false)}
           >
             Contact

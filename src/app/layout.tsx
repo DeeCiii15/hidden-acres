@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import {
+  Bodoni_Moda,
   Cormorant_Garamond,
   Italianno,
-  Josefin_Sans,
-  Lora,
 } from "next/font/google";
 import { FloatingContactBar } from "@/components/FloatingContactBar";
 import { Footer } from "@/components/Footer";
@@ -24,26 +23,20 @@ const italianno = Italianno({
   display: "swap",
 });
 
-/** Elegant companion for longer headings that need more structure. */
+/** Site UI / body / display — all non-script type (default weight 600). */
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
-/** Warm readable body serif that sits with the script. */
-const lora = Lora({
-  variable: "--font-lora",
+/** Print / PDF serif — classic Bodoni via Google’s Bodoni Moda. */
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
   subsets: ["latin"],
-  display: "swap",
-});
-
-/** Light, refined sans for nav, buttons, and labels. */
-const josefin = Josefin_Sans({
-  variable: "--font-josefin",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -74,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${italianno.variable} ${cormorant.variable} ${lora.variable} ${josefin.variable}`}
+      className={`${italianno.variable} ${cormorant.variable} ${bodoni.variable}`}
     >
       <body className="site-shell antialiased">
         <Header />
