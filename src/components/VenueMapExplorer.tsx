@@ -64,8 +64,8 @@ function ExpandedCard({
       href={`${VENUE_PATH}#${space.slug}`}
       className={`group relative z-30 block ${
         isMobile
-          ? "w-[6.5rem]"
-          : "w-[12.5rem] sm:w-[14rem] lg:w-[15.5rem]"
+          ? "w-[5.75rem]"
+          : "w-[10.75rem] sm:w-[12rem] lg:w-[13.25rem]"
       } ${
         side === "left"
           ? "animate-venue-expand-left"
@@ -77,7 +77,7 @@ function ExpandedCard({
         className={`relative block bg-[#faf8f3] shadow-[0_22px_48px_-14px_rgba(26,38,32,0.42)] transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_28px_56px_-12px_rgba(26,38,32,0.46)] ${
           isMobile
             ? "px-1 pb-1.5 pt-1"
-            : "px-2.5 pb-3.5 pt-2.5 sm:px-3 sm:pb-4 sm:pt-3"
+            : "px-2 pb-3 pt-2 sm:px-2.5 sm:pb-3.5 sm:pt-2.5"
         }`}
         style={{ borderRadius: ARCH_CARD_RADIUS }}
       >
@@ -92,7 +92,7 @@ function ExpandedCard({
             alt=""
             fill
             quality={95}
-            sizes="(max-width: 768px) 104px, 360px"
+            sizes="(max-width: 768px) 92px, 300px"
             className="object-cover transition duration-700 group-hover:scale-[1.03]"
             style={{
               objectPosition: objectPositionBySlug[space.slug] ?? "center",
@@ -102,14 +102,14 @@ function ExpandedCard({
 
         <span
           className={`flex flex-col items-center px-0.5 text-center ${
-            isMobile ? "mt-1" : "mt-2.5 sm:mt-3"
+            isMobile ? "mt-1" : "mt-2 sm:mt-2.5"
           }`}
         >
           <span
             className={`font-display leading-tight text-forest ${
               isMobile
-                ? "text-[0.7rem]"
-                : "text-[1.05rem] sm:text-[1.2rem]"
+                ? "text-[0.65rem]"
+                : "text-[0.95rem] sm:text-[1.05rem]"
             }`}
           >
             {space.name}
@@ -117,8 +117,8 @@ function ExpandedCard({
           <span
             className={`font-ui text-champagne transition group-hover:text-forest ${
               isMobile
-                ? "mt-0.5 text-[7px] uppercase tracking-[0.12em]"
-                : "mt-1.5 text-[9px] uppercase tracking-[0.16em] sm:mt-2 sm:text-[10px]"
+                ? "mt-0.5 text-[6.5px] uppercase tracking-[0.12em]"
+                : "mt-1 text-[8px] uppercase tracking-[0.16em] sm:mt-1.5 sm:text-[9px]"
             }`}
           >
             See this space

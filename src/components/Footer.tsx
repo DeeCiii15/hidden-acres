@@ -130,7 +130,7 @@ export function Footer() {
           </ul>
         </div>
 
-        <div className="mt-0 text-left leading-none md:col-start-3 md:row-start-1 md:mt-4 md:text-right">
+        <div className="mt-0 text-right leading-none md:col-start-3 md:row-start-1 md:mt-4">
           <p className="font-ui text-[9px] uppercase leading-none tracking-[0.2em] text-champagne-soft sm:text-[10px]">
             Explore
           </p>

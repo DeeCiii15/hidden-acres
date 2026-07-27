@@ -40,7 +40,8 @@ export type SlotLayout = {
  */
 export const SLOT_LAYOUT: Record<MapPinSlot, SlotLayout> = {
   "top-left": { side: "left", topPct: 18, insetPct: 0, mouthLift: 6 },
-  "mid-right": { side: "right", topPct: 60, insetPct: 0, mouthLift: 6 },
+  /** Higher on the map (farther north) so the right card clears the mid cluster */
+  "mid-right": { side: "right", topPct: 48, insetPct: 0, mouthLift: 6 },
   "bottom-left": { side: "left", topPct: 78, insetPct: 0, mouthLift: 6 },
 };
 

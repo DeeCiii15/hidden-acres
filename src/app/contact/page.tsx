@@ -70,8 +70,9 @@ export default function ContactPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-cream via-paper/90 to-paper" />
         </div>
 
-        <div className="mx-auto grid max-w-7xl gap-14 px-5 pb-20 md:px-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <Reveal>
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 pb-20 md:gap-14 md:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-x-14 lg:gap-y-0">
+          {/* Intro stays first on mobile; left column top on desktop */}
+          <Reveal className="order-1 lg:col-start-1 lg:row-start-1">
             <p className="eyebrow text-champagne">Get in touch</p>
             <h1 className="mt-4 font-script text-5xl text-forest md:text-6xl lg:text-7xl">
               Come walk the grounds with us
@@ -81,8 +82,28 @@ export default function ContactPage() {
               you&apos;re dreaming of. We&apos;d love to show you Hidden Acres
               in person.
             </p>
+          </Reveal>
 
-            <div className="mt-10 space-y-4 text-sm">
+          {/* Form before email/phone/address on mobile; right column on desktop */}
+          <Reveal className="order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2">
+            <div className="rounded-2xl border border-stroke bg-cream/85 p-6 shadow-[0_30px_60px_-40px_rgba(26,38,32,0.45)] md:p-8">
+              <ContactForm />
+            </div>
+            <p className="mt-6 text-sm text-muted">
+              Prefer to browse first?{" "}
+              <Link href={PORTFOLIO_PATH} className="text-champagne hover:underline">
+                See the portfolio
+              </Link>{" "}
+              or read{" "}
+              <Link href={`${ABOUT_PATH}#faq`} className="text-champagne hover:underline">
+                FAQs
+              </Link>
+              .
+            </p>
+          </Reveal>
+
+          <Reveal className="order-3 lg:col-start-1 lg:row-start-2 lg:mt-10">
+            <div className="space-y-4 text-sm">
               <p>
                 <span className="text-muted">Email</span>
                 <br />
@@ -139,23 +160,6 @@ export default function ContactPage() {
                 Get directions
               </Button>
             </div>
-          </Reveal>
-
-          <Reveal>
-            <div className="rounded-2xl border border-stroke bg-cream/85 p-6 shadow-[0_30px_60px_-40px_rgba(26,38,32,0.45)] md:p-8">
-              <ContactForm />
-            </div>
-            <p className="mt-6 text-sm text-muted">
-              Prefer to browse first?{" "}
-              <Link href={PORTFOLIO_PATH} className="text-champagne hover:underline">
-                See the portfolio
-              </Link>{" "}
-              or read{" "}
-              <Link href={`${ABOUT_PATH}#faq`} className="text-champagne hover:underline">
-                FAQs
-              </Link>
-              .
-            </p>
           </Reveal>
         </div>
       </section>
