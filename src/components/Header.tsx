@@ -87,7 +87,7 @@ export function Header() {
               : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 overflow-visible px-4 sm:h-[4.5rem] sm:gap-3 sm:px-5 md:h-20 md:px-8">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 overflow-visible px-4 pt-[env(safe-area-inset-top)] pr-[max(1rem,env(safe-area-inset-right))] sm:h-[4.5rem] sm:gap-3 sm:px-5 sm:pr-[max(1.25rem,env(safe-area-inset-right))] md:h-20 md:px-8 md:pr-8">
           <Link
             href="/"
             className="inline-flex min-w-0 shrink items-center gap-1 overflow-visible sm:gap-2.5 md:gap-3"
@@ -145,7 +145,7 @@ export function Header() {
 
           <button
             type="button"
-            className={`inline-flex h-10 w-10 shrink-0 items-center justify-center lg:hidden ${
+            className={`relative z-10 -mr-1 inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-visible lg:hidden ${
               onDarkHero ? "text-white" : "text-[#2c3b32]"
             }`}
             aria-label={open ? "Close menu" : "Open menu"}
@@ -153,15 +153,21 @@ export function Header() {
             onClick={() => setOpen((v) => !v)}
           >
             <span className="sr-only">Menu</span>
-            <span className="flex flex-col gap-1.5" aria-hidden>
+            <span className="relative block h-3.5 w-5 overflow-visible" aria-hidden>
               <span
-                className={`block h-px w-5 bg-current transition ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
+                className={`absolute left-0 top-0 block h-px w-5 origin-center bg-current transition duration-300 ${
+                  open ? "top-[6.5px] rotate-45" : ""
+                }`}
               />
               <span
-                className={`block h-px w-5 bg-current transition ${open ? "opacity-0" : ""}`}
+                className={`absolute left-0 top-[6.5px] block h-px w-5 bg-current transition duration-300 ${
+                  open ? "opacity-0" : ""
+                }`}
               />
               <span
-                className={`block h-px w-5 bg-current transition ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+                className={`absolute left-0 top-[13px] block h-px w-5 origin-center bg-current transition duration-300 ${
+                  open ? "top-[6.5px] -rotate-45" : ""
+                }`}
               />
             </span>
           </button>
@@ -173,12 +179,12 @@ export function Header() {
           open ? "block" : "hidden"
         }`}
       >
-        <div className="flex flex-col px-5 py-4">
+        <div className="flex flex-col px-5 py-3">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="font-ui border-b border-[#2c3b32]/10 py-3.5 text-sm uppercase tracking-[0.16em] text-[#2c3b32]"
+              className="font-ui border-b border-[#2c3b32]/10 py-3 text-xs uppercase tracking-[0.16em] text-[#2c3b32]"
               onClick={() => setOpen(false)}
             >
               {link.label}
@@ -186,7 +192,7 @@ export function Header() {
           ))}
           <Link
             href={CONTACT_PATH}
-            className="font-ui mt-4 inline-flex items-center justify-center bg-[#2c3b32] px-5 py-3.5 text-sm uppercase tracking-[0.16em] text-white"
+            className="font-ui mt-3 inline-flex items-center justify-center bg-[#2c3b32] px-4 py-3 text-xs uppercase tracking-[0.16em] text-white"
             onClick={() => setOpen(false)}
           >
             Contact

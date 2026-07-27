@@ -25,7 +25,7 @@ export function Button({
   return (
     <Link
       href={href}
-      className={`font-ui inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium uppercase tracking-[0.16em] transition duration-300 ${variants[variant]} ${className}`}
+      className={`font-ui inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-medium uppercase tracking-[0.16em] transition duration-300 md:px-6 md:py-3.5 md:text-sm ${variants[variant]} ${className}`}
     >
       {children}
     </Link>
