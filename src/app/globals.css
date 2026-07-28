@@ -146,16 +146,23 @@ a {
 }
 
 .hero-media {
-  animation: hero-ken 28s ease-in-out infinite alternate;
+  animation: hero-ken 32s ease-in-out infinite alternate;
+  transform-origin: 48% 32%;
   will-change: transform;
 }
 
 @keyframes hero-ken {
   from {
-    transform: scale(1.02) translate3d(0, 0, 0);
+    transform: scale(1.05) translate3d(0, 0, 0);
   }
   to {
-    transform: scale(1.06) translate3d(-0.4%, 0.25%, 0);
+    transform: scale(1.11) translate3d(-0.5%, 0.35%, 0);
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-media {
+    transform-origin: 50% 26%;
   }
 }
 
@@ -289,8 +296,8 @@ a {
 
 /*
   Unveil: continue from the pocket peek, slide further out of the
-  mouth (still tucked behind the pocket), then come forward and
-  settle slightly down covering the wax seal. No scale/opacity spawn.
+  mouth (still tucked behind the pocket), then come forward in front
+  of the pocket face. Wax seal stays above the sheet (see .love-letter-seal-slot).
   Peak → settle handoff is tight so the pause between up and down is brief.
 */
 @keyframes letter-unveil {
@@ -358,8 +365,8 @@ a {
 }
 
 /*
-  Open letter: emerges high, then rests lower so the sheet
-  covers the wax seal while the envelope name stays readable.
+  Open letter: emerges high, then rests lower so the quote reads
+  while the envelope name and wax seal stay visible below.
 */
 .love-letter-unit.is-unveiled {
   --letter-lift: 22%;
@@ -650,6 +657,7 @@ a {
 .love-letter-pocket-face {
   position: absolute;
   inset: 0;
+  z-index: 1;
   border-radius: 2px;
   background: linear-gradient(
     180deg,
@@ -661,6 +669,22 @@ a {
   /* Open-envelope pocket: V notch at top so the letter reads as emerging */
   clip-path: polygon(0% 0%, 50% 46%, 100% 0%, 100% 100%, 0% 100%);
   box-shadow: inset 0 1px 0 color-mix(in oklab, white 40%, transparent);
+}
+
+/*
+  Seal is a sibling of pocket + sheet (not inside clipped pocket-face).
+  z-index above unveiled letter (sheet peaks at 5) so the letter corner
+  never peeks over the green HA seal.
+*/
+.love-letter-seal-slot {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  z-index: 8;
+  display: flex;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .love-letter-pocket-folds {
@@ -822,4 +846,174 @@ a {
     transform: none;
     transition: none;
   }
+}
+
+/* ── Polaroid scrapbook galleries (light) ───────────────────────── */
+/*
+  Match public/brand/polaroid-style-ref.png almost 1:1:
+  cream fibrous cardstock, ragged deckled edge + white fiber core,
+  narrow top/side photo margins, deep bottom chin, green HA seal + twine bow.
+*/
+
+.polaroid-scrapbook {
+  background:
+    radial-gradient(
+      900px 420px at 12% 0%,
+      color-mix(in oklab, white 78%, var(--champagne-soft) 22%),
+      transparent 55%
+    ),
+    radial-gradient(
+      700px 380px at 92% 18%,
+      color-mix(in oklab, white 86%, var(--sage-soft) 14%),
+      transparent 50%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, white 92%, var(--cream) 8%) 0%,
+      color-mix(in oklab, white 82%, var(--paper) 18%) 44%,
+      color-mix(in oklab, white 72%, var(--paper) 28%) 100%
+    );
+}
+
+.polaroid-stack {
+  isolation: isolate;
+}
+
+.polaroid-deckle,
+.polaroid-deckle-fiber {
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.polaroid-deckle {
+  -webkit-mask-image: url("/brand/polaroid-deckle-mask.png");
+  mask-image: url("/brand/polaroid-deckle-mask.png");
+}
+
+.polaroid-deckle-fiber {
+  -webkit-mask-image: url("/brand/polaroid-deckle-fiber.png");
+  mask-image: url("/brand/polaroid-deckle-fiber.png");
+}
+
+/* Soft diffused shadow following the deckled silhouette (like the reference) */
+.polaroid-card {
+  filter: drop-shadow(0 20px 26px rgba(49, 41, 32, 0.16))
+    drop-shadow(0 7px 11px rgba(67, 57, 43, 0.09))
+    drop-shadow(0 2px 3px rgba(33, 27, 21, 0.07));
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+
+.polaroid-card:hover {
+  filter: drop-shadow(0 28px 32px rgba(49, 41, 32, 0.2))
+    drop-shadow(0 11px 15px rgba(67, 57, 43, 0.11))
+    drop-shadow(0 2px 4px rgba(33, 27, 21, 0.08));
+}
+
+/* Bright white pulp core under the ivory torn edge */
+.polaroid-fiber {
+  z-index: 0;
+  background: linear-gradient(
+    145deg,
+    #fffefc 0%,
+    #fdfaf3 52%,
+    #f6f0e6 100%
+  );
+}
+
+/* Brighter ivory cardstock so the card reads white, not brown */
+.polaroid-frame {
+  position: relative;
+  z-index: 1;
+  background-color: #faf7f0;
+  background-image:
+    url("/brand/paper-cardstock.png"),
+    radial-gradient(
+      118% 88% at 50% 7%,
+      rgba(255, 255, 255, 0.74) 0%,
+      rgba(255, 253, 248, 0.28) 46%,
+      transparent 72%
+    ),
+    linear-gradient(
+      180deg,
+      #fffdf9 0%,
+      #fcf8f1 34%,
+      #f8f2e9 68%,
+      #f4ecdf 100%
+    );
+  background-size: 180px 180px, auto, auto;
+  background-blend-mode: soft-light, screen, normal;
+  box-shadow:
+    inset 0 0 0 1px rgba(132, 113, 86, 0.05),
+    inset 0 0 28px rgba(90, 72, 48, 0.035);
+}
+
+/*
+  Measured from polaroid-style-ref.png (after deckle fringe):
+  sides ~7%, top ~5%, bottom chin ~19% of card height.
+  Percentage padding keeps margins proportional at every size.
+*/
+.polaroid-mat {
+  padding: 7.25% 10.75% 23%;
+}
+
+.polaroid-photo {
+  background: color-mix(in oklab, white 94%, var(--paper) 6%);
+  /* Soft hand-cut print edge — not razor-sharp */
+  border-radius: 0.12rem;
+  box-shadow:
+    0 0 0 0.5px rgba(88, 72, 51, 0.08),
+    0 1px 2px rgba(42, 32, 24, 0.045) inset;
+  filter: saturate(0.94) contrast(1.01) brightness(1.02);
+}
+
+.polaroid-caption-slot {
+  height: 20%;
+  padding: 0 4%;
+}
+
+.polaroid-caption {
+  color: #2d2822;
+  font-size: clamp(1.55rem, 8.2vw, 1.95rem);
+  letter-spacing: 0.01em;
+  text-shadow: 0 0.5px 0 rgba(255, 255, 255, 0.55);
+}
+
+@media (min-width: 768px) {
+  .polaroid-caption {
+    font-size: 2.05rem;
+  }
+}
+
+/*
+  Twine knot sits under the seal at top-left.
+  Knot is ~34% from left / ~30% from top of the twine asset.
+*/
+.polaroid-twine {
+  left: -16%;
+  top: -11%;
+  width: 88%;
+  height: auto;
+  max-width: none;
+  aspect-ratio: 1299 / 801;
+  object-fit: contain;
+  object-position: left center;
+  z-index: 1;
+}
+
+.polaroid-seal {
+  left: 4%;
+  top: 0.5%;
+  width: 20.5%;
+  height: auto;
+  aspect-ratio: 1;
+  z-index: 2;
+  transform: rotate(-8deg);
 }

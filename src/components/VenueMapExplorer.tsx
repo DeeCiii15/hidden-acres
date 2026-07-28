@@ -65,7 +65,7 @@ function ExpandedCard({
       className={`group relative z-30 block ${
         isMobile
           ? "w-[5.75rem]"
-          : "w-[12.25rem] sm:w-[13.75rem] lg:w-[15rem]"
+          : "w-[13rem] sm:w-[14.5rem] lg:w-[15.75rem]"
       } ${
         side === "left"
           ? "animate-venue-expand-left"
@@ -215,8 +215,8 @@ function PopoutAnchor({
               ? "left-0"
               : "right-0"
             : layout.side === "left"
-              ? "right-[-0.75rem] sm:right-[-0.5rem]"
-              : "left-[-0.75rem] sm:left-[-0.5rem]"
+              ? "right-[-0.75rem] sm:right-[-0.5rem] md:right-[-3rem] lg:right-[-3.5rem]"
+              : "left-[-0.75rem] sm:left-[-0.5rem] md:left-[-3rem] lg:left-[-3.5rem]"
         }`}
       >
         {children}

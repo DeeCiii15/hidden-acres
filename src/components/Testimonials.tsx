@@ -306,11 +306,13 @@ function LetterFromEnvelope({
               {item.name}
             </p>
             <BotanicalCorner className="love-letter-pocket-botanical text-sage/55" />
-            <span className="absolute left-1/2 top-[52%] flex -translate-x-1/2 -translate-y-1/2 justify-center">
-              <WaxSeal />
-            </span>
           </div>
         </div>
+
+        {/* Seal above pocket + unveiled letter so no letter corner peeks over it */}
+        <span aria-hidden className="love-letter-seal-slot">
+          <WaxSeal />
+        </span>
       </div>
     </article>
   );

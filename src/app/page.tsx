@@ -24,7 +24,7 @@ import { testimonials } from "@/lib/testimonials";
 import { venueSpaces } from "@/lib/venueData";
 
 export default function HomePage() {
-  const featured = getFeaturedWeddings(5);
+  const featured = getFeaturedWeddings(6);
   const siteUrl = getSiteUrl();
 
   return (
@@ -51,7 +51,7 @@ export default function HomePage() {
 
       <section
         id="hero-surface"
-        className="relative min-h-[100svh] overflow-hidden"
+        className="relative min-h-[100svh] overflow-hidden supports-[height:100dvh]:min-h-[100dvh]"
       >
         <div className="absolute inset-0">
           <Image
@@ -61,17 +61,17 @@ export default function HomePage() {
             priority
             quality={95}
             sizes="100vw"
-            className="object-cover object-center"
+            className="hero-media object-cover object-[center_36%] md:object-[48%_30%] xl:object-[50%_26%] 2xl:object-[52%_24%]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/85 via-forest-deep/35 to-black/25" />
         </div>
 
-        <div className="relative z-10 flex min-h-[100svh] flex-col justify-end px-5 pb-16 pt-28 md:px-8 md:pb-24">
+        <div className="relative z-10 flex min-h-[100svh] flex-col justify-end px-5 pb-16 pt-28 supports-[height:100dvh]:min-h-[100dvh] md:px-8 md:pb-24 xl:pb-28">
           <div className="mx-auto w-full max-w-7xl">
             <p className="eyebrow animate-rise text-champagne-soft">
               Marion, SC · Pee Dee · Wedding weekends
             </p>
-            <h1 className="animate-rise-delay-1 mt-5 max-w-4xl font-script text-5xl leading-[1.02] text-cream md:text-7xl lg:text-[5.5rem]">
+            <h1 className="animate-rise-delay-1 mt-5 max-w-4xl font-script text-5xl leading-[1.02] text-cream md:text-7xl lg:text-[5.5rem] xl:text-[6.25rem]">
               Hidden Acres
             </h1>
             <p className="animate-rise-delay-2 mt-4 max-w-xl font-display text-2xl leading-snug text-cream/95 md:text-3xl lg:text-4xl">

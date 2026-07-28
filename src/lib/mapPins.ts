@@ -36,7 +36,7 @@ export type SlotLayout = {
 
 /**
  * Fixed anchors for the three popout cards (percent of map height).
- * Cards sit on the map edge — left/right offsets stay tight to the art.
+ * Cards slightly overlap the map on desktop without changing mobile layout.
  */
 export const SLOT_LAYOUT: Record<MapPinSlot, SlotLayout> = {
   "top-left": { side: "left", topPct: 18, insetPct: 0, mouthLift: 6 },

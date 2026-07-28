@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 92" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="t1" x1="0" y1="0" x2="1" y2="0.25">
+      <stop offset="0%" stop-color="#c9b08a"/>
+      <stop offset="40%" stop-color="#b08a5e"/>
+      <stop offset="100%" stop-color="#8f6e48"/>
+    </linearGradient>
+    <linearGradient id="t2" x1="0" y1="0.3" x2="1" y2="0">
+      <stop offset="0%" stop-color="#dcc8a8"/>
+      <stop offset="55%" stop-color="#c4a47a"/>
+      <stop offset="100%" stop-color="#a88860"/>
+    </linearGradient>
+  </defs>
+  <!-- Twisted strands wrap across top, tucked under seal at left -->
+  <path d="M14 48 C 36 28, 58 24, 86 36 C 112 48, 136 26, 168 34 C 200 42, 224 24, 256 32 C 284 38, 304 22, 328 30"
+    stroke="url(#t1)" stroke-width="2.55" stroke-linecap="round" fill="none" opacity="0.96"/>
+  <path d="M16 52 C 38 32, 62 28, 88 40 C 114 52, 138 30, 170 38 C 202 46, 226 28, 258 36 C 286 42, 306 26, 330 34"
+    stroke="url(#t2)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.88"/>
+  <path d="M12 56 C 44 42, 68 50, 96 42 C 126 32, 150 50, 182 44 C 214 38, 238 54, 270 46 C 296 40, 314 50, 334 44"
+    stroke="url(#t1)" stroke-width="2.25" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <path d="M14 60 C 46 46, 70 54, 98 46 C 128 36, 152 54, 184 48 C 216 42, 240 58, 272 50 C 298 44, 316 54, 336 48"
+    stroke="url(#t2)" stroke-width="1.75" stroke-linecap="round" fill="none" opacity="0.82"/>
+  <!-- Loop under / near seal -->
+  <path d="M52 38 C 64 18, 92 16, 106 34 C 114 44, 100 54, 82 50 C 70 48, 60 44, 52 38"
+    stroke="url(#t1)" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.94"/>
+  <path d="M58 42 C 68 26, 88 24, 100 38" stroke="url(#t2)" stroke-width="1.8" stroke-linecap="round" opacity="0.82"/>
+  <!-- Left ends tuck down under seal -->
+  <path d="M14 50 C 4 58, 2 68, 10 78" stroke="url(#t1)" stroke-width="2.2" stroke-linecap="round" opacity="0.88"/>
+  <path d="M20 54 C 10 62, 8 70, 16 80" stroke="url(#t2)" stroke-width="1.7" stroke-linecap="round" opacity="0.78"/>
+  <!-- Right side: wrap slightly down the edge like the reference -->
+  <path d="M318 32 C 332 38, 336 52, 328 66 C 322 76, 330 84, 338 90"
+    stroke="url(#t1)" stroke-width="2.35" stroke-linecap="round" opacity="0.92"/>
+  <path d="M322 36 C 334 44, 338 56, 330 68 C 324 78, 332 86, 336 92"
+    stroke="url(#t2)" stroke-width="1.85" stroke-linecap="round" opacity="0.82"/>
+  <path d="M310 34 C 320 48, 318 62, 324 74" stroke="url(#t1)" stroke-width="1.9" stroke-linecap="round" opacity="0.75"/>
+</svg>
