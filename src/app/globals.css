@@ -687,6 +687,10 @@ a {
   pointer-events: none;
 }
 
+.love-letter-unit.is-unveiled .love-letter-seal-slot {
+  z-index: 4;
+}
+
 .love-letter-pocket-folds {
   position: absolute;
   inset: 0;

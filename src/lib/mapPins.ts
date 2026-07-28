@@ -61,13 +61,13 @@ export const MOBILE_SLOT_LAYOUT: Record<MapPinMobileSlot, SlotLayout> = {
 export const SLOT_DEFAULTS: Record<MapPinSlot, string> = {
   "top-left": "the-chapel",
   "mid-right": "rusted-silo",
-  "bottom-left": "the-ballroom",
+  "bottom-left": "grooms-quarters",
 };
 
 export const MOBILE_SLOT_DEFAULTS: Record<MapPinMobileSlot, string> = {
   "top-left": "the-chapel",
   "mid-right": "rusted-silo",
-  "bottom-left": "the-ballroom",
+  "bottom-left": "grooms-quarters",
 };
 
 export const DESKTOP_SLOT_ORDER: MapPinSlot[] = [
